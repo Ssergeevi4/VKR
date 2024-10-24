@@ -1,0 +1,89 @@
+﻿<Window
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+mc:Ignorable="av" x:Class="WpfApp2.MainWindow"
+ Title="Viewport3D Example" Height="800" Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Viewport3D x:Name="viewport" ClipToBounds="True" Grid.Row="0"
+Margin="0,0,338,0">
+            <!-- Определение источников света -->
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Model3DGroup>
+                        <!--направленный-->
+                        <DirectionalLight x:Name="DirectionalLight" Direction="-2,1,4"
+/>
+                        <!--точечный-->
+                        <PointLight x:Name="PointLight" Position="4,2,3" Range="10"
+ConstantAttenuation="1" LinearAttenuation="0.1" QuadraticAttenuation="0.01" />
+                        <!--прожектор-->
+                        <SpotLight x:Name="SpotLight" Position="4, 6,1" Direction="0,-1,0" InnerConeAngle="0.1" OuterConeAngle="25" Range="5" />
+                    </Model3DGroup>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+        </Viewport3D>
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New Project" />
+                <MenuItem Header="Open Project" >
+                    <MenuItem Header="WinForms"/>
+                    <MenuItem Header="WPF" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Exit" />
+                
+            </MenuItem>
+            <MenuItem Header="Edit" />
+            <MenuItem Header="View" />
+        </Menu>
+        <WrapPanel Orientation="Vertical" HorizontalAlignment="Right" Background="LightGray" Margin="0,25,0,0" Width="338">
+            <Button Content="LigthingOff" Click="LightsOff" Margin="5"/>
+            <Button Content="DirectionalLight" Click="DirectionalLightButton"
+Margin="5"/>
+            <Button Content="PointLight" Click="PointLightButton" Margin="5"/>
+            <Button Content="SpotLight" Click="SpotLightButton" Margin="5"/>
+            <Button Content="ResetCamera" Click="ResetCameraButton" Margin="5"/>
+            <Button Content="Управление" Click="Button_Click" Margin="15"/>
+            <StackPanel Orientation="Vertical">
+                <!-- Направленный свет -->
+                <TextBlock Text="Directional Light Direction:"/>
+                <TextBox x:Name="DirectionalLightDirectionX" Text="{Binding
+DirectionalLightDirection.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="DirectionalLightDirectionY" Text="{Binding
+DirectionalLightDirection.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="DirectionalLightDirectionZ" Text="{Binding
+DirectionalLightDirection.Z, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <!-- Точечный свет -->
+                <TextBlock Text="Point Light Position:"/>
+                <TextBox x:Name="PointLightPositionX" Text="{Binding
+PointLightPosition.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="PointLightPositionY" Text="{Binding
+PointLightPosition.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="PointLightPositionZ" Text="{Binding
+PointLightPosition.Z, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <!-- Прожектор -->
+                <TextBlock Text="Spot Light Position:"/>
+                <TextBox x:Name="SpotLightPositionX" Text="{Binding
+SpotLightPosition.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="SpotLightPositionY" Text="{Binding
+SpotLightPosition.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="SpotLightPositionZ" Text="{Binding
+SpotLightPosition.Z, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+
+
+            </StackPanel>
+            <Button Content="Update Positions" Click="UpdatePositions"/>
+            <TextBlock x:Name="ShapesTextBlock" VerticalAlignment="Top" Margin="10"/>
+        </WrapPanel>
+        <CheckBox x:Name="axisCheckBox" Content="Координаты" Margin="0,33,81,0"
+VerticalAlignment="Top" Checked="AxisCheckBox_Checked"
+Unchecked="AxisCheckBox_Unchecked" HorizontalAlignment="Right" Width="88"/>
+    </Grid>
+</Window>
